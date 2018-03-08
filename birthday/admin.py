@@ -1,20 +1,19 @@
 from django.contrib import admin
-from .models import Mensaje, Cumple
+from .models import BirthdayDay, BirthdayMessage
 # Register your models here.
 
-# Personalizacion del Panel de administracion
-class MensajeAdmin(admin.ModelAdmin):
+class MessageAdmin(admin.ModelAdmin):
     search_fields = ['msg']
     list_fields = ['msg']
     filter_fields = ['msg']
 
-admin.site.register(Mensaje,MensajeAdmin)
+admin.site.register(BirthdayMessage,MessageAdmin)
 
 
-class CumpleAdmin(admin.ModelAdmin):
-    search_fields = ['nombre','cumple','mail']
-    list_filter = ['cumple']
-    list_display = ['nombre','cumple','mail']
+class BirthdayDayAdmin(admin.ModelAdmin):
+    search_fields = ['name','birthday_day','mail']
+    list_filter = ['birthday_day']
+    list_display = ['name','birthday_day','mail']
 
 
-admin.site.register(Cumple,CumpleAdmin)
+admin.site.register(BirthdayDay,BirthdayDayAdmin)

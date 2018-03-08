@@ -1,12 +1,11 @@
 import smtplib 
-import getpass 
 import os 
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from decouple import config
 
-# environ var
+# environ var from .env
 email = config('USERNAME_MAIL')
 password = config('USERNAME_MAIL_PASSWORD')
 
