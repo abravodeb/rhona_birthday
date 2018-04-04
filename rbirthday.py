@@ -1,31 +1,26 @@
-# -*- coding: utf-8 -*-
 import os
 import django
-from django.utils import timezone
-from datetime import datetime
-from PIL import Image, ImageDraw, ImageFont
-from send_gmail_email import send_email
+import datetime
+import PIL
+import sendmail
+import birthday.models
 
-#today = date.today() # 
+#today = date.today() #
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "rhona.settings")
 django.setup()
-
-# import birthday model 
-from birthday.models import Cumple
-
 # get current day & month
 currentDay = datetime.now().day
 currentMonth = datetime.now().month
 
 # test, print all users
 def get_all_users():
-    users = Cumple.objects.all()
+    users = BirthdayDay.objects.all()
     # test
     for i in users:
         print(i.id)
-        print(i.nombre)
+        print(i.name)
         print(i.msg)
-        print(i.cumple)
+        print(i.birthday_day)
 
 # test - add text on image
 
@@ -39,19 +34,18 @@ def test_image_name(name, msg):
 
 # get all users and filter by date.
 def query_today():
-    total_users = Cumple.objects.all()
-    print("usuarios totales en BD:", len(total_users))
-    cumples = Cumple.objects.filter(cumple__month=currentMonth,cumple__day=currentDay) # filter
+    total_users = BirthdayDay.objects.all()
+    print("Number of users:", len(total_users))
+    cumples = BirthdayDay.objects.filter(birthday_day__month=currentMonth,birthday_day__day=currentDay) # filter
     return cumples
 
 if __name__ == '__main__':
     #get_all_users()
-    print("pruebas con filtro, fecha de hoy!  ---- ")
     cumple = query_today()
     for i in cumple:
-        print(i.nombre)
-    print("Usuarios Filtrados por fecha: ", len(cumple))
+        print(i.name)
+    print("User filter by date : ", len(cumple))
     for i in cumple:
-        test_image_name(i.nombre,"saludos...")
-        send_email(i.nombre,i.mail,i.msg)
+        test_image_name(i.name,"Regards...")
+        send_email(i.name,i.mail,i.msg)
 

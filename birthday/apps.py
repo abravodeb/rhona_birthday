@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
-
-class BirthdayConfig(AppConfig):
+class birthdayConfig(AppConfig):
     name = 'birthday'
+    verbose_name = "Rhona Cumpleaños"
